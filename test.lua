@@ -102,70 +102,12 @@ for i, v in pairs(game.RobloxReplicatedStorage:GetDescendants()) do
 	end)
 end
 
-local LoginPage = Instance.new("ScreenGui")
-LoginPage.Name = "LoginPage"
-LoginPage.Parent = game.CoreGui
-LoginPage.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-LoginPage.Enabled = true
 
 
-local LoginService = loadstring(game:HttpGet("https://raw.githubusercontent.com/diaslo/EgorchikHichimiroProject/main/loginpage.lua"))()
-
-local textbox = Instance.new("TextBox")
-textbox.Name = "PassBox"
-textbox.AnchorPoint = Vector2.new(0.5, 0.5)
-textbox.Position = UDim2.new(0.5, 0, 0.5, 0)
-textbox.Size = UDim2.new(0, 200, 0, 50)
-textbox.Parent = LoginPage
-textbox.BackgroundTransparency = 0.5
-textbox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-textbox.BorderSizePixel = 0
-textbox.Font = Enum.Font.SourceSans
-textbox.TextSize = 18
-textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
-textbox.PlaceholderText = "Enter password"
-textbox.TextStrokeTransparency = 0.5
-textbox.TextXAlignment = Enum.TextXAlignment.Center
-textbox.TextYAlignment = Enum.TextYAlignment.Center
-
-textbox.FocusLost:Connect(function(enterpressed)
-	if enterpressed then
-		local response = LoginService.login(textbox.Text)
-		if response["code"] then
-			LoginPage:Destroy()
-			task.spawn(function()	
 				local discord = loadstring(game:HttpGet("https://raw.githubusercontent.com/diaslo/EgorchikHichimiroProject/main/discord.lua"))()
 				local win = discord:Window("UGC-Sniper")
 				local serv = win:Server("UGC-Sniper", "http://www.roblox.com/asset/?id=17871796559")
 				local ugc = serv:Channel("Main")
-				end)
-
-				local ClickingSpeed = 0
-				local loopActive = false
-
-
-
-
-local actic = false
-
-
-				local players = serv:Channel("AntiAFKEgor")
-				players:Toggle("Anti Afk-Egor", false, function(bool)
-					if bool == true then
-						Players.LocalPlayer.Idled:connect(function()
-							VirtualUser:CaptureController()
-							VirtualUser:ClickButton2(Vector2.new())
-						end)
-					end
-				end)
-				local signal
-				players:Seperator()
-			end)
-		else
-			textbox.Text = "Wrong password"
-		end
-	end
-end)
 
 
 -- BY Egorovich
