@@ -109,5 +109,19 @@ end
 				local serv = win:Server("UGC-Sniper", "http://www.roblox.com/asset/?id=17871796559")
 				local ugc = serv:Channel("Main")
 
+        ugc:Toggle("Find Foods", false, function(bool)
+
+          loopActive = bool
+
+          if loopActive then
+            while loopActive == true do
+                 -- ТУТ ДЕЙСТВИЯ
+              wait(0)
+              if loopActive == false then
+                break
+              end
+            end
+          end
+        end)
 
 -- BY Egorovich
