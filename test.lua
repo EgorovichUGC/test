@@ -105,8 +105,8 @@ end
 
 
 				local discord = loadstring(game:HttpGet("https://raw.githubusercontent.com/diaslo/EgorchikHichimiroProject/main/discord.lua"))()
-				local win = discord:Window("UGC-Sniper")
-				local serv = win:Server("UGC-Sniper", "http://www.roblox.com/asset/?id=17871796559")
+				local win = discord:Window("BY EGOROBICH")
+				local serv = win:Server("Find The Foods", "http://www.roblox.com/asset/?id=17871796559")
 				local ugc = serv:Channel("Main")
 
         ugc:Toggle("Find Foods", false, function(bool)
