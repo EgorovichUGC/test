@@ -1,356 +1,149 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RBK Refresher</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            position: relative;
-        }
-
-        .title {
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            text-align: center;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .title h1 {
-            font-size: 3.5rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
-        }
-
-        .input-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            text-align: center;
-            width: 80%;
-            max-width: 500px;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 15px 20px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .input-field:focus {
-            background: rgba(255, 255, 255, 1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            transform: scale(1.02);
-        }
-
-        .input-field::placeholder {
-            color: #666;
-            font-style: italic;
-        }
-
-        .cookie {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: radial-gradient(circle at 30% 30%, #F4A460, #D2691E, #8B4513);
-            border-radius: 50%;
-            box-shadow: 
-                0 4px 8px rgba(0, 0, 0, 0.3),
-                inset 0 2px 4px rgba(255, 255, 255, 0.2);
-            animation: smoothFall 6s linear forwards;
-            z-index: 100;
-            border: 2px solid #654321;
-        }
-
-        .cookie::before {
-            content: '';
-            position: absolute;
-            top: 6px;
-            left: 10px;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, #3E2723, #2E1A17);
-            border-radius: 50%;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .cookie::after {
-            content: '';
-            position: absolute;
-            top: 22px;
-            left: 25px;
-            width: 5px;
-            height: 5px;
-            background: radial-gradient(circle, #3E2723, #2E1A17);
-            border-radius: 50%;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Дополнительные точки с правильными пропорциями */
-        .cookie .dot1 {
-            position: absolute;
-            top: 8px;
-            left: 26px;
-            width: 3px;
-            height: 3px;
-            background: radial-gradient(circle, #3E2723, #2E1A17);
-            border-radius: 50%;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .cookie .dot2 {
-            position: absolute;
-            top: 16px;
-            left: 8px;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, #3E2723, #2E1A17);
-            border-radius: 50%;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .cookie .dot3 {
-            position: absolute;
-            top: 28px;
-            left: 14px;
-            width: 3px;
-            height: 3px;
-            background: radial-gradient(circle, #3E2723, #2E1A17);
-            border-radius: 50%;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .cookie .dot4 {
-            position: absolute;
-            top: 14px;
-            left: 22px;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, #3E2723, #2E1A17);
-            border-radius: 50%;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .cookie .dot5 {
-            position: absolute;
-            top: 24px;
-            left: 30px;
-            width: 3px;
-            height: 3px;
-            background: radial-gradient(circle, #3E2723, #2E1A17);
-            border-radius: 50%;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .cookie .dot6 {
-            position: absolute;
-            top: 10px;
-            left: 18px;
-            width: 3px;
-            height: 3px;
-            background: radial-gradient(circle, #3E2723, #2E1A17);
-            border-radius: 50%;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        @keyframes smoothFall {
-            0% {
-                transform: translateY(-60px) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(calc(100vh + 60px)) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px) translateX(0px);
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-
-        .status {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 1rem;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 8px 16px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Steal a Drop — PvP дуэли</title>
+  <meta name="description" content="Steal a Drop — PvP дуэли 1 на 1 в реальном времени. Быстрый матчмейкинг и честные раунды." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-    <div class="title">
-        <h1>RBK Refresher</h1>
+  <div class="bg">
+    <div class="bg__glow bg__glow--a"></div>
+    <div class="bg__glow bg__glow--b"></div>
+    <div class="bg__grid"></div>
+  </div>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand">
+        <div class="brand__logo" aria-hidden="true">S</div>
+        <div class="brand__text">
+          <div class="brand__name">Steal a Drop</div>
+          <div class="brand__tag">PvP дуэли 1 на 1</div>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <a class="link" href="#how">Как это работает</a>
+        <a class="link" href="#play">Играть</a>
+      </div>
     </div>
+  </header>
 
-    <div class="input-container">
-        <input type="text" class="input-field" placeholder="Введите текст здесь..." id="textInput">
+  <main class="container">
+    <section class="hero">
+      <div class="hero__left">
+        <h1 class="h1">Дуэли в реальном времени.</h1>
+        <p class="sub">
+          Это рабочий MVP: быстрый матчмейкинг и простая PvP-дуэль “камень‑ножницы‑бумага” через WebSocket.
+          Дальше можно нарастить механику до “как на большом сайте”: аккаунты, инвентарь, ставки, рейтинги.
+        </p>
+
+        <div class="cards" id="how">
+          <div class="card">
+            <div class="card__title">1) Подключение</div>
+            <div class="card__text">Вводишь ник → подключаешься к серверу.</div>
+          </div>
+          <div class="card">
+            <div class="card__title">2) Матч</div>
+            <div class="card__text">Нажимаешь “В очередь” → система находит соперника.</div>
+          </div>
+          <div class="card">
+            <div class="card__title">3) Дуэль</div>
+            <div class="card__text">Выбираете ход → сервер честно считает результат.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__right" id="play">
+        <div class="panel">
+          <div class="panel__header">
+            <div class="panel__title">PvP Arena</div>
+            <div class="pill" id="pillStatus">offline</div>
+          </div>
+
+          <div class="panel__section">
+            <label class="label" for="nick">Ник</label>
+            <div class="row">
+              <input id="nick" class="input" maxlength="18" placeholder="Например: dropkid" autocomplete="off" />
+              <button class="btn" id="btnConnect">Подключиться</button>
+            </div>
+            <div class="hint">Совет: открой эту страницу в двух вкладках и попробуй подраться сам с собой.</div>
+          </div>
+
+          <div class="panel__section">
+            <div class="row">
+              <button class="btn btn--ghost" id="btnQueue" disabled>В очередь</button>
+              <button class="btn btn--danger" id="btnLeave" disabled>Покинуть матч</button>
+            </div>
+          </div>
+
+          <div class="panel__section">
+            <div class="versus">
+              <div class="versus__side">
+                <div class="versus__label">Ты</div>
+                <div class="versus__name" id="youName">—</div>
+              </div>
+              <div class="versus__mid">VS</div>
+              <div class="versus__side">
+                <div class="versus__label">Соперник</div>
+                <div class="versus__name" id="oppName">—</div>
+              </div>
+            </div>
+
+            <div class="moves" aria-label="Выбор хода">
+              <button class="move" data-move="rock" disabled>Камень</button>
+              <button class="move" data-move="paper" disabled>Бумага</button>
+              <button class="move" data-move="scissors" disabled>Ножницы</button>
+            </div>
+
+            <div class="log" id="log" role="status" aria-live="polite"></div>
+          </div>
+
+          <div class="panel__footer">
+            <div class="tiny">
+              MVP не копирует чужой сайт “1 в 1”. Он даёт основу PvP (реал‑тайм + честный расчёт) — дальше это масштабируется.
+              Если планируешь ставки/деньги — заранее проверь законы и лицензирование в своей стране.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps">
+      <h2 class="h2">Что нужно, чтобы сделать “как большой проект”</h2>
+      <div class="steps__grid">
+        <div class="step">
+          <div class="step__title">Аккаунты</div>
+          <div class="step__text">Регистрация, email/Discord/Roblox OAuth, профили, блокировки.</div>
+        </div>
+        <div class="step">
+          <div class="step__title">Серверная логика</div>
+          <div class="step__text">Игровые комнаты, анти‑абуз, логирование, лимиты, очередь.</div>
+        </div>
+        <div class="step">
+          <div class="step__title">База данных</div>
+          <div class="step__text">Пользователи, матчи, инвентарь, транзакции, аудит.</div>
+        </div>
+        <div class="step">
+          <div class="step__title">Оплата/ставки (если нужно)</div>
+          <div class="step__text">Платёжки, KYC/AML, возвраты, политика, лицензии.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="tiny">© <span id="year"></span> Steal a Drop</div>
+      <div class="tiny">Сделано как стартовый шаблон, который можно развивать.</div>
     </div>
+  </footer>
 
-    <div class="status" id="status">
-        Готов к работе
-    </div>
-
-    <div class="particles" id="particles"></div>
-
-    <script>
-        // Создание падающих печеньек
-        function createCookie() {
-            const cookie = document.createElement('div');
-            cookie.className = 'cookie';
-            cookie.style.left = Math.random() * (window.innerWidth - 40) + 'px';
-            cookie.style.animationDuration = (Math.random() * 2 + 5) + 's'; // 5-7 секунд
-            cookie.style.animationDelay = '0s';
-            
-            // Добавляем точки с разной вероятностью для естественности
-            for (let i = 1; i <= 6; i++) {
-                if (Math.random() > 0.3) { // 70% вероятность появления каждой точки
-                    const dot = document.createElement('div');
-                    dot.className = `dot${i}`;
-                    cookie.appendChild(dot);
-                }
-            }
-            
-            document.body.appendChild(cookie);
-            
-            // Удаляем печеньку после анимации
-            setTimeout(() => {
-                if (cookie.parentNode) {
-                    cookie.parentNode.removeChild(cookie);
-                }
-            }, 8000);
-        }
-
-        // Создание частиц
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = Math.random() * window.innerHeight + 'px';
-            particle.style.animationDelay = Math.random() * 4 + 's';
-            
-            document.getElementById('particles').appendChild(particle);
-            
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.parentNode.removeChild(particle);
-                }
-            }, 4000);
-        }
-
-        // Обработка ввода текста
-        let inputTimer = null;
-        let isTyping = false;
-
-        function handleInput() {
-            const input = document.getElementById('textInput');
-            const status = document.getElementById('status');
-            
-            if (!isTyping) {
-                isTyping = true;
-                status.textContent = 'Печатаете...';
-                
-                // Запускаем интенсивную анимацию печеньек
-                const cookieInterval = setInterval(() => {
-                    createCookie();
-                }, 100); // Печенька каждые 100мс
-                
-                // Останавливаем через 3 секунды
-                setTimeout(() => {
-                    clearInterval(cookieInterval);
-                }, 3000);
-            }
-            
-            // Сбрасываем таймер
-            if (inputTimer) {
-                clearTimeout(inputTimer);
-            }
-            
-            inputTimer = setTimeout(() => {
-                isTyping = false;
-                status.textContent = 'Готов к работе';
-            }, 2000);
-        }
-
-        // Инициализация
-        function init() {
-            // Создаем печеньки постоянно, но не слишком часто
-            setInterval(createCookie, 600); // Увеличили частоту
-            
-            // Создаем частицы каждые 300мс
-            setInterval(createParticle, 300);
-            
-            // Добавляем обработчик ввода
-            document.getElementById('textInput').addEventListener('input', handleInput);
-            document.getElementById('textInput').addEventListener('keydown', handleInput);
-            
-            // Создаем начальные печеньки
-            setTimeout(() => {
-                for (let i = 0; i < 8; i++) { // Увеличили количество начальных печеньек
-                    setTimeout(createCookie, i * 200);
-                }
-            }, 1000);
-        }
-
-        // Запускаем при загрузке страницы
-        window.addEventListener('load', init);
-    </script>
+  <script src="./app.js"></script>
 </body>
 </html>

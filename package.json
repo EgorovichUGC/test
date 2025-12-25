@@ -1,0 +1,15 @@
+{
+  "name": "steal-a-drop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Steal a Drop — MVP PvP website (WebSocket matchmaking + duel).",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
+  }
+}
+
