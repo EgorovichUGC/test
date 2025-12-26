@@ -17,130 +17,152 @@
     <div class="bg__grid"></div>
   </div>
 
-  <header class="topbar">
-    <div class="topbar__inner">
-      <div class="brand">
-        <div class="brand__logo" aria-hidden="true">S</div>
-        <div class="brand__text">
-          <div class="brand__name">Steal a Drop</div>
-          <div class="brand__tag">PvP дуэли 1 на 1</div>
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar__inner">
+        <div class="brand">
+          <div class="brand__logo" aria-hidden="true">S</div>
+          <div class="brand__text">
+            <div class="brand__name">Steal a Drop</div>
+            <div class="brand__tag">Duels • Live • PvP</div>
+          </div>
+        </div>
+
+        <nav class="topnav" aria-label="Навигация">
+          <a class="topnav__link topnav__link--active" href="#">Duels</a>
+          <a class="topnav__link" href="#" aria-disabled="true" title="Скоро">Coinflip</a>
+          <a class="topnav__link" href="#" aria-disabled="true" title="Скоро">Crash</a>
+        </nav>
+
+        <div class="topbar__right">
+          <div class="wallet" title="Демо баланс (не настоящие деньги)">
+            <div class="wallet__label">Balance</div>
+            <div class="wallet__value"><span id="balance">1000.00</span> 💧</div>
+          </div>
+          <div class="pill" id="pillStatus">offline</div>
+          <button class="btn btn--ghost btn--small" type="button" aria-disabled="true" title="Скоро">Log in</button>
+        </div>
+      </div>
+    </header>
+
+    <aside class="sidebar" aria-label="Меню">
+      <div class="sidebar__section">
+        <div class="sidebar__title">Games</div>
+        <a class="slink slink--active" href="#">Duels</a>
+        <a class="slink" href="#" aria-disabled="true">Coinflip</a>
+        <a class="slink" href="#" aria-disabled="true">Crash</a>
+      </div>
+
+      <div class="sidebar__section">
+        <div class="sidebar__title">Quick tips</div>
+        <div class="sidebar__note">
+          Открой сайт в двух вкладках, подключись разными никами, нажми “Queue” и выбирай ход.
+        </div>
+        <div class="sidebar__note sidebar__note--muted">
+          Это MVP-дизайн в стиле крупных проектов, но без копирования бренда/макета “1 в 1”.
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="main__head">
+        <div>
+          <div class="kicker">Duels</div>
+          <h1 class="h1">1v1 PvP Duel</h1>
+          <div class="sub">Матчмейкинг в реальном времени. Ставка — демо (для UI).</div>
+        </div>
+
+        <div class="controls">
+          <div class="field">
+            <div class="field__label">Nick</div>
+            <div class="field__row">
+              <input id="nick" class="input input--compact" maxlength="18" placeholder="dropkid" autocomplete="off" />
+              <button class="btn btn--small" id="btnConnect" type="button">Connect</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field__label">Wager</div>
+            <div class="field__row">
+              <input id="wager" class="input input--compact" inputmode="decimal" value="10" />
+              <button class="btn btn--ghost btn--small" id="btnQueue" type="button" disabled>Queue</button>
+              <button class="btn btn--danger btn--small" id="btnLeave" type="button" disabled>Leave</button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="topbar__right">
-        <a class="link" href="#how">Как это работает</a>
-        <a class="link" href="#play">Играть</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <div class="hero__left">
-        <h1 class="h1">Дуэли в реальном времени.</h1>
-        <p class="sub">
-          Это рабочий MVP: быстрый матчмейкинг и простая PvP-дуэль “камень‑ножницы‑бумага” через WebSocket.
-          Дальше можно нарастить механику до “как на большом сайте”: аккаунты, инвентарь, ставки, рейтинги.
-        </p>
-
-        <div class="cards" id="how">
-          <div class="card">
-            <div class="card__title">1) Подключение</div>
-            <div class="card__text">Вводишь ник → подключаешься к серверу.</div>
-          </div>
-          <div class="card">
-            <div class="card__title">2) Матч</div>
-            <div class="card__text">Нажимаешь “В очередь” → система находит соперника.</div>
-          </div>
-          <div class="card">
-            <div class="card__title">3) Дуэль</div>
-            <div class="card__text">Выбираете ход → сервер честно считает результат.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero__right" id="play">
-        <div class="panel">
+      <div class="grid">
+        <section class="panel panel--arena" aria-label="Arena">
           <div class="panel__header">
-            <div class="panel__title">PvP Arena</div>
-            <div class="pill" id="pillStatus">offline</div>
-          </div>
-
-          <div class="panel__section">
-            <label class="label" for="nick">Ник</label>
-            <div class="row">
-              <input id="nick" class="input" maxlength="18" placeholder="Например: dropkid" autocomplete="off" />
-              <button class="btn" id="btnConnect">Подключиться</button>
-            </div>
-            <div class="hint">Совет: открой эту страницу в двух вкладках и попробуй подраться сам с собой.</div>
-          </div>
-
-          <div class="panel__section">
-            <div class="row">
-              <button class="btn btn--ghost" id="btnQueue" disabled>В очередь</button>
-              <button class="btn btn--danger" id="btnLeave" disabled>Покинуть матч</button>
-            </div>
+            <div class="panel__title">Arena</div>
+            <div class="panel__meta">Keys: 1 камень • 2 бумага • 3 ножницы</div>
           </div>
 
           <div class="panel__section">
             <div class="versus">
               <div class="versus__side">
-                <div class="versus__label">Ты</div>
+                <div class="versus__label">You</div>
                 <div class="versus__name" id="youName">—</div>
               </div>
               <div class="versus__mid">VS</div>
               <div class="versus__side">
-                <div class="versus__label">Соперник</div>
+                <div class="versus__label">Opponent</div>
                 <div class="versus__name" id="oppName">—</div>
               </div>
             </div>
 
             <div class="moves" aria-label="Выбор хода">
-              <button class="move" data-move="rock" disabled>Камень</button>
-              <button class="move" data-move="paper" disabled>Бумага</button>
-              <button class="move" data-move="scissors" disabled>Ножницы</button>
+              <button class="move" data-move="rock" disabled>Rock</button>
+              <button class="move" data-move="paper" disabled>Paper</button>
+              <button class="move" data-move="scissors" disabled>Scissors</button>
             </div>
 
             <div class="log" id="log" role="status" aria-live="polite"></div>
           </div>
+        </section>
 
-          <div class="panel__footer">
-            <div class="tiny">
-              MVP не копирует чужой сайт “1 в 1”. Он даёт основу PvP (реал‑тайм + честный расчёт) — дальше это масштабируется.
-              Если планируешь ставки/деньги — заранее проверь законы и лицензирование в своей стране.
-            </div>
+        <section class="panel panel--history" aria-label="History">
+          <div class="panel__header">
+            <div class="panel__title">Match history</div>
+            <div class="panel__meta">Последние результаты (локально)</div>
+          </div>
+          <div class="panel__section panel__section--tight">
+            <div class="list" id="history"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <aside class="rightbar" aria-label="Live">
+      <section class="panel">
+        <div class="panel__header">
+          <div class="panel__title">Live feed</div>
+          <div class="panel__meta">События</div>
+        </div>
+        <div class="panel__section panel__section--tight">
+          <div class="list" id="liveFeed"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel__header">
+          <div class="panel__title">Chat</div>
+          <div class="panel__meta">Скоро</div>
+        </div>
+        <div class="panel__section panel__section--tight">
+          <div class="chatPlaceholder">
+            Чат/сообщества/модерация — это отдельный большой блок. В этом MVP оставил место под него.
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="steps">
-      <h2 class="h2">Что нужно, чтобы сделать “как большой проект”</h2>
-      <div class="steps__grid">
-        <div class="step">
-          <div class="step__title">Аккаунты</div>
-          <div class="step__text">Регистрация, email/Discord/Roblox OAuth, профили, блокировки.</div>
-        </div>
-        <div class="step">
-          <div class="step__title">Серверная логика</div>
-          <div class="step__text">Игровые комнаты, анти‑абуз, логирование, лимиты, очередь.</div>
-        </div>
-        <div class="step">
-          <div class="step__title">База данных</div>
-          <div class="step__text">Пользователи, матчи, инвентарь, транзакции, аудит.</div>
-        </div>
-        <div class="step">
-          <div class="step__title">Оплата/ставки (если нужно)</div>
-          <div class="step__text">Платёжки, KYC/AML, возвраты, политика, лицензии.</div>
-        </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </aside>
+  </div>
 
   <footer class="footer">
     <div class="footer__inner">
       <div class="tiny">© <span id="year"></span> Steal a Drop</div>
-      <div class="tiny">Сделано как стартовый шаблон, который можно развивать.</div>
+      <div class="tiny">Demo build. No real money. No brand copying.</div>
     </div>
   </footer>
 
